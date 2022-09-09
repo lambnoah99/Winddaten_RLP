@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc index.ts",
+    "start": "node index.js"
+  },
   "dependencies": {
     "dms-conversion": "^3.1.1",
     "mysql2": "^2.3.3",
