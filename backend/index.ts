@@ -1,6 +1,7 @@
 import *as express from 'express';
 import { Request, Response} from 'express';
 import { createConnection } from 'mysql2';
+import { Anlage } from './models/Anlage';
 
 const PORT: number = 8081;
 // Instantiate new Epxress-Server
@@ -23,7 +24,7 @@ app.get('/', (_req: Request, res: Response) => {
 })
 
 app.get('/anlagen', (_req: Request, res: Response) => {
-    connection.query('SELECT * FROM anlagen', (err, rows) => {
+    connection.query('SELECT id, name, latitude, longitude FROM anlagen', (err, rows: Anlage[]) => {
         if(err) {
             console.error(err);
         }
