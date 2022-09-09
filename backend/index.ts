@@ -32,6 +32,21 @@ app.get('/anlagen', (_req: Request, res: Response) => {
     });
 });
 
+app.get('/anlagen/:id', (req: Request, res: Response) => {
+    if(req.params.id) {
+
+        connection.query('SELECT * FROM anlagen WHERE id = ?', [req.params.id], (err, rows) => {
+            if(err) {
+                console.error(err);
+                res.send(400);
+            }
+            res.json(rows);
+        });
+    } else {
+        res.status(400);
+    }
+});
+
 
 // Start Epxress Server 
 app.listen(PORT, () => console.log(`Server started on Port ${PORT}`));
