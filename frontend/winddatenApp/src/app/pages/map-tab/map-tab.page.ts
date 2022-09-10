@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { Geolocation } from '@capacitor/geolocation';
+import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 
 @Component({
   selector: 'app-map-tab',
@@ -9,6 +10,10 @@ import { Geolocation } from '@capacitor/geolocation';
 })
 export class MapTabPage {
   map: Leaflet.Map;
+
+  constructor(private geolocationService: GeolocationService) {
+
+  }
 
   ionViewDidEnter() {
     this.initMap();
@@ -22,7 +27,7 @@ export class MapTabPage {
     Leaflet.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map);
   
     // Get User Coordinates and add a Marker to the Map
-    this.getCoordinates()
+    this.geolocationService.getCoordinates()
     .then((coordinates) => {
       const icon = Leaflet.icon({
         iconUrl: 'assets/marker-icon-2x.png',
@@ -37,11 +42,6 @@ export class MapTabPage {
   // Adds a Marker to the Map
   private addMarker(coordinates: number[], options?: Object) {
     Leaflet.marker(coordinates, options).addTo(this.map);
-  }
-
-  // Returns Coordinates of Device
-  private async getCoordinates() {
-    return await (await Geolocation.getCurrentPosition()).coords;
   }
 
   ionViewWillLeave() {
