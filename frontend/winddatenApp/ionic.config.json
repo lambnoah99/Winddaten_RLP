@@ -1,0 +1,7 @@
+{
+  "name": "winddatenApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
