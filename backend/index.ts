@@ -2,7 +2,7 @@ import *as express from 'express';
 import { Request, Response} from 'express';
 import { createConnection } from 'mysql2';
 import { Anlage } from './models/Anlage';
-import { cors } from 'cors';
+import * as cors from 'cors';
 
 const PORT: number = 8081;
 // Instantiate new Epxress-Server
