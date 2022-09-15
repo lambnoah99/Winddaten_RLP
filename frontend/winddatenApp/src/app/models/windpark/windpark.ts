@@ -12,4 +12,9 @@ export interface WindparkDetails {
     longitude: number;
     performance: number;
     amount: number;
+    constructionYear?: Number;
+    type?: string;
+    place?: string;
+    district?: string;
+    notes?: string
 }

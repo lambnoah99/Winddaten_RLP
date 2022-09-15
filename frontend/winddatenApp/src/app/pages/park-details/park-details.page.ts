@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Windpark } from 'src/app/models/windpark/windpark';
+import { WindparkDetails } from 'src/app/models/windpark/windpark';
 import { WindparkService } from 'src/app/services/windpark/windpark.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { WindparkService } from 'src/app/services/windpark/windpark.service';
   styleUrls: ['./park-details.page.scss'],
 })
 export class ParkDetailsPage implements OnInit {
-  windpark: Windpark;
+  windpark: WindparkDetails;
 
   constructor(private route: ActivatedRoute, private windparkService: WindparkService) { }
 
@@ -30,8 +29,8 @@ export class ParkDetailsPage implements OnInit {
     .pipe(
       take(1)
     )
-    .subscribe((windpark: Windpark) => {
-      this.windpark = windpark[0];
+    .subscribe((windpark: WindparkDetails) => {
+      this.windpark = windpark;
       console.log(this.windpark);
     });
   }

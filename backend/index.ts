@@ -1,7 +1,7 @@
 import *as express from 'express';
 import { Request, Response} from 'express';
 import { createConnection } from 'mysql2';
-import { Anlage } from './models/Anlage';
+import { Windpark } from './models/Windpark';
 import * as cors from 'cors';
 
 const PORT: number = 8081;
@@ -26,7 +26,7 @@ app.get('/', (_req: Request, res: Response) => {
 })
 
 app.get('/anlagen', (_req: Request, res: Response) => {
-    connection.query('SELECT id, name, latitude, longitude FROM anlagen', (err, rows: Anlage[]) => {
+    connection.query('SELECT id, name, latitude, longitude FROM anlagen', (err, rows:  Windpark[]) => {
         if(err) {
             console.error(err);
         }
@@ -42,7 +42,7 @@ app.get('/anlagen/:id', (req: Request, res: Response) => {
                 console.error(err);
                 res.send(400);
             }
-            res.json(rows);
+            res.json(rows[0]);
         });
     } else {
         res.status(400);
