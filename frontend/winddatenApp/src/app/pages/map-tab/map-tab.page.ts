@@ -64,8 +64,12 @@ export class MapTabPage {
     });
     // Add Each windpark to the map as Marker
     windparks.forEach((windpark: Windpark) => {
-      this.addMarker([windpark.latitude, windpark.longitude], { icon }, windpark.name);
+      this.addMarker([windpark.latitude, windpark.longitude], { icon }, this.createPopupText(windpark.name, windpark.id));
     });
+  }
+
+  private createPopupText(name: string, id: number): string {
+    return `${name} <br><a href='/details/${id}'>Details >>></a>`
   }
 
   // Destroy Map when leaving Page and unsubscribe all Observables

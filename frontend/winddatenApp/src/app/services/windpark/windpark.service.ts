@@ -16,4 +16,8 @@ export class WindparkService {
   public getWindparks(): Observable<Windpark[]> {
     return this.http.get<Windpark[]>(`${this.apiUrl}/anlagen`);
   }
+
+  public getWindpark(id: number): Observable<Windpark> {
+    return this.http.get<Windpark>(`${this.apiUrl}/anlagen/${id}`)
+  }
 }
