@@ -15,13 +15,35 @@
       <ion-card-title>{{ windpark.name }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Windräder: {{ windpark.amount }} MW</p>
-      <p>Leistung: {{ windpark.performance }} MW</p>
-      <p>Baujahr: {{ windpark.constructionYear }}</p>
-      <p>Typ: {{ windpark.type }}</p>
-      <p>Ort: {{ windpark.place }}</p>
-      <p>Land-Kreis: {{ windpark.district }}</p>
-      <p>Bemerkungen: {{ windpark.notes }}</p>
+      <ion-list>
+        <ion-item>
+          <ion-label>Windräder: {{ windpark.amount }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Leistung: {{ windpark.performance }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Baujahr: {{ windpark.constructionYear }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-text>
+            Typ: {{ windpark.type }}
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text>
+            Ort: {{ windpark.place }}
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Land-Kreis: {{ windpark.district }}</ion-label>
+        </ion-item>
+        <ion-item [expandable]="true">
+          <ion-text>
+            Bemerkungen: {{ windpark.notes }}
+          </ion-text>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
