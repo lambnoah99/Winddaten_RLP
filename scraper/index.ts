@@ -14,7 +14,7 @@ const connection = createConnection({
     port: 3306,
     user: 'root',
     password: '12345678',
-    database: 'wind'
+    database: 'winddata'
 });
 // Connect to Database
 connection.connect((
@@ -58,7 +58,7 @@ function convertDmsToDD(dms: string): DDCoordinates {
 // Adds a single Anlage into the Database
 function insertIntoDB(park: Windpark) {
     connection.query(`
-        INSERT INTO anlagen (name, performance, amount, latitude, longitude, constructionYear, type, place, district, notes) 
+        INSERT INTO parks (name, performance, amount, latitude, longitude, constructionYear, type, place, district, notes) 
         VALUES ('${park.name}','${park.performance}','${park.amount}','${park.coordinates.latitude}','${park.coordinates.longitude}','${park.constructionYear}','${park.type}','${park.place}','${park.district}','${park.notes}')
     `)
 }

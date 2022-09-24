@@ -10,4 +10,5 @@ export interface Windpark {
     place?: string;
     district?: string;
     notes?: string
+    currentPerformance?: number;
 }

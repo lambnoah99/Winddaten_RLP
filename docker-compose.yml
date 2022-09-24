@@ -1,0 +1,54 @@
+version: '3.8'
+
+networks:
+  internal:
+    internal: true
+  external:
+    driver: bridge
+
+services:
+  backendservice:
+    build: backend
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal
+      - external
+    ports:
+      - 8081:8081
+    stdin_open: true
+    tty: true
+  scraper:
+    build: scraper
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal
+    stdin_open: true
+    tty: true
+  db:
+    image: mysql:8.0.27
+    command:  mysqld --sql-mode=''
+    environment:
+      MYSQL_ROOT_PASSWORD: lorem123
+      MYSQL_DATABASE: "winddata"
+      MYSQL_USER: "myuser"
+      MYSQL_PASSWORD: "mypassword"
+    networks:
+      - internal
+      - external
+    ports:
+      - 3306:3306
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d/
+    stdin_open: true
+    tty: true
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: [ "CMD", "mysql", "-h", "localhost", "-P", "3306", "-u", "root", "--password=lorem123", "-e", "select 1", "winddata" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5

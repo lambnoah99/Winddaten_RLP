@@ -3,6 +3,7 @@ export interface Windpark {
     name: string;
     latitude: number;
     longitude: number;
+    currentPerformance?: number;
 }
 
 export interface WindparkDetails {

@@ -20,7 +20,7 @@
           <ion-label>Windräder: {{ windpark.amount }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Leistung: {{ windpark.performance }}</ion-label>
+          <ion-label>Jahreserzeugnis: {{ windpark.performance }} MW</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Baujahr: {{ windpark.constructionYear }}</ion-label>
@@ -38,7 +38,12 @@
         <ion-item>
           <ion-label>Land-Kreis: {{ windpark.district }}</ion-label>
         </ion-item>
-        <ion-item [expandable]="true">
+        <ion-item>
+          <ion-text>
+            Aktuelles Erzeugnis: {{ windpark.currentPerformance }} kW/h
+          </ion-text>
+        </ion-item>
+        <ion-item>
           <ion-text>
             Bemerkungen: {{ windpark.notes }}
           </ion-text>

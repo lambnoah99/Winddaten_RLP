@@ -16,7 +16,7 @@ const connection = createConnection({
     port: 3306,
     user: 'root',
     password: '12345678',
-    database: 'wind'
+    database: 'winddata'
 });
 // Connect to DB
 connection.connect(); 
@@ -26,7 +26,7 @@ app.get('/', (_req: Request, res: Response) => {
 })
 
 app.get('/anlagen', (_req: Request, res: Response) => {
-    connection.query('SELECT id, name, latitude, longitude FROM anlagen', (err, rows:  Windpark[]) => {
+    connection.query('SELECT id, name, latitude, longitude, currentPerformance FROM parks', (err, rows:  Windpark[]) => {
         if(err) {
             console.error(err);
         }
@@ -37,7 +37,7 @@ app.get('/anlagen', (_req: Request, res: Response) => {
 app.get('/anlagen/:id', (req: Request, res: Response) => {
     if(req.params.id) {
 
-        connection.query('SELECT * FROM anlagen WHERE id = ?', [req.params.id], (err, rows) => {
+        connection.query('SELECT * FROM parks WHERE id = ?', [req.params.id], (err, rows) => {
             if(err) {
                 console.error(err);
                 res.send(400);

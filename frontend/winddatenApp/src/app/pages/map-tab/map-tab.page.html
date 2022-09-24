@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map-tab</ion-title>
+    <ion-title>Map</ion-title>
+    <ion-item slot="end">
+      <ion-text>Heatmap</ion-text>
+      <ion-toggle (ionChange)="toggleChange($event)"></ion-toggle>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
