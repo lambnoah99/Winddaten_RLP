@@ -28,17 +28,23 @@ services:
       - internal
     stdin_open: true
     tty: true
+  powersimulator:
+    build: powersimulator
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - internal
+    stdin_open: true
+    tty: true
   db:
     image: mysql:8.0.27
     command:  mysqld --sql-mode=''
     environment:
-      MYSQL_ROOT_PASSWORD: lorem123
-      MYSQL_DATABASE: "winddata"
-      MYSQL_USER: "myuser"
-      MYSQL_PASSWORD: "mypassword"
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: winddata
     networks:
       - internal
-      - external
     ports:
       - 3306:3306
     volumes:
@@ -48,7 +54,7 @@ services:
     cap_add:
       - SYS_NICE
     healthcheck:
-      test: [ "CMD", "mysql", "-h", "localhost", "-P", "3306", "-u", "root", "--password=lorem123", "-e", "select 1", "winddata" ]
-      interval: 5s
-      timeout: 5s
+      test: [ "CMD", "mysql", "-h", "localhost", "-P", "3306", "-u", "root", "--password=12345678", "-e", "select 1", "winddata" ]
+      interval: 30s
+      timeout: 30s
       retries: 5

@@ -50,12 +50,11 @@ var apiKey = '7ba94bce30e5d6697a151cd4b94b6325';
 // Connect to DB
 connection.connect();
 var windparks = [];
-var currentWindspeed = 60;
 var windSpeeds = [
     {
         latitude: 49.93307862572027,
         longitude: 7.469163209694419,
-        speed: 60
+        speed: 10
     }
 ];
 cycle();
@@ -85,7 +84,7 @@ function writeWindparks() {
     });
 }
 function calculate(windpark) {
-    var multiplier = interpolate(windpark.latitude, windpark.longitude) / 10;
+    var multiplier = interpolate(windpark.latitude, windpark.longitude) * 5;
     windpark.currentPerformance = (((windpark.performance * multiplier) * 1000) / 365 / 24);
     return windpark;
 }

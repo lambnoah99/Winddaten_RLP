@@ -1,4 +1,4 @@
-import *as express from 'express';
+import * as express from 'express';
 import { Request, Response} from 'express';
 import { createConnection } from 'mysql2';
 import { Windpark } from './models/Windpark';
@@ -12,11 +12,10 @@ app.use(cors());
 
 // Db Config
 const connection = createConnection({
-    host: 'localhost',
+    host: 'db',
     port: 3306,
     user: 'root',
     password: '12345678',
-    database: 'winddata'
 });
 // Connect to DB
 connection.connect(); 
@@ -36,9 +35,8 @@ app.get('/anlagen', (_req: Request, res: Response) => {
 
 app.get('/anlagen/:id', (req: Request, res: Response) => {
     if(req.params.id) {
-
         connection.query('SELECT * FROM parks WHERE id = ?', [req.params.id], (err, rows) => {
-            if(err) {
+            if(err || !rows) {
                 console.error(err);
                 res.send(400);
             }

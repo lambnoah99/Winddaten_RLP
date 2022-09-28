@@ -7,10 +7,26 @@ import { DDCoordinates } from './models/DDCoordinates';
 
 const url = "https://de.wikipedia.org/wiki/Liste_von_Windkraftanlagen_in_Rheinland-Pfalz";
 let parks: Windpark[] = [];
+const createQuery = `
+CREATE TABLE parks (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    performance DOUBLE NOT NULL,
+    amount INT NOT NULL,
+    latitude VARCHAR(255),
+    longitude VARCHAR(255),
+    constructionYear INT,
+    type VARCHAR(255),
+    place VARCHAR(255),
+    district VARCHAR(255),
+    notes VARCHAR(512),
+    currentPerformance INT,
+    PRIMARY KEY(id)
+)`
 
 // DB config
 const connection = createConnection({
-    host: 'localhost',
+    host: 'db',
     port: 3306,
     user: 'root',
     password: '12345678',
@@ -25,6 +41,9 @@ connection.connect((
 // Scrape Table from Wikipedia
 get(url).then((tableData: any) => {
 
+    // Create Table in Database
+    connection.query(createQuery);
+    
     // Filter out relevant data and add them to anlagen Array
     tableData[0].forEach((park: any) => {
         parks.push({
